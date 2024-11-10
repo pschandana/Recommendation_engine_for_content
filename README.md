@@ -19,7 +19,7 @@ Before running the application, ensure you have the following installed:
 
 # Setting Up the Environment 
 # Step 1: Clone the Repository
-git clone https://github.com/dasaribhumika/learning-path-generator
+git clone https://github.com/gudashashank/LEAP
 
 cd learning-path-generator
 
