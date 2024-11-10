@@ -1,14 +1,14 @@
-# Personalized Learning Path Generator
+# Personalized Learning Path Generator📚🚀
 
 This is a web application that generates a personalized learning path based on your educational background, skills, and goals. The app uses an AI model to create a customized plan and allows you to download it as a `.docx` file. It leverages the `python-dotenv` library for managing environment variables and keeps sensitive information (like API keys) safe from being exposed in the code.
 
-## Features
+## Features🌟
 - Generates a customized learning path based on user input.
 - Displays a timeline-style learning path.
 - Allows users to download the learning path as a `.docx` file.
 - Securely handles sensitive information like API keys using environment variables.
 
-## Prerequisites
+## Prerequisites⚙️
 
 Before running the application, ensure you have the following installed:
 - Python 3.x or later
@@ -16,7 +16,8 @@ Before running the application, ensure you have the following installed:
 - Requests
 - python-dotenv
 - docx
-- 
+
+# Setting Up the Environment 
 # Step 1: Clone the Repository
 git clone https://github.com/dasaribhumika/learning-path-generator
 cd learning-path-generator
@@ -49,10 +50,15 @@ Add .env to the .gitignore to prevent accidentally committing your API key to Gi
 # Step 6: Run the Application
 streamlit run app.py
 
-## How It Works
-User Input: The user provides their educational background, skills, and goals in the text areas on the web app.
-Generate Learning Path: Upon clicking the "Generate Learning Path" button, the app processes the input using the AI model and generates a customized learning path.
-Download: The learning path is displayed on the page, and the user can download it as a .docx file for further use.
+## How It Works 🤖
+**User Input:** The user provides their educational background, skills, and goals in the text areas on the web app.
+**Generate Learning Path:** Upon clicking the "Generate Learning Path" button, the app processes the input using the AI model and generates a customized learning path.
+**Download:** The learning path is displayed on the page, and the user can download it as a .docx file for further use.
 
-## Contributing
-If you would like to contribute to this project, feel free to fork the repository, create a new branch, and submit a pull request.
+## Contributing 🤝
+If you would like to contribute to this project, feel free to:
+
+Fork the repository
+Create a new branch
+Submit a pull request
+Your contributions are always welcome!
