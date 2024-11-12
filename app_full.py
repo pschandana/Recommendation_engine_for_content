@@ -5,18 +5,34 @@ import requests
 from docx import Document
 from docx.shared import Pt
 import io
-from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.exceptions import OutputParserException
 
-# Load environment variables
-load_dotenv()
+# Modified environment setup to work with both local and deployment
+def get_api_key():
+    # First try to get from Streamlit Secrets
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+    except:
+        # If not found in Streamlit Secrets, try local .env file
+        api_key = 'Not Found'
+    
+    if api_key is None:
+        st.error("No API key found. Please set up your GROQ API key in the environment variables.")
+        st.stop()
+    
+    return api_key
 
-# Chain class implementation
+# Chain class implementation with secure API key handling
 class Chain:
     def __init__(self):
-        self.llm = ChatGroq(temperature=0, groq_api_key=os.getenv("GROQ_API_KEY"), model_name="llama-3.1-70b-versatile")
+        api_key = get_api_key()
+        self.llm = ChatGroq(
+            temperature=0, 
+            groq_api_key=api_key, 
+            model_name="llama-3.1-70b-versatile"
+        )
 
     def generate_learning_path(self, educational_background, skills, goals):
         prompt_path = PromptTemplate.from_template(
@@ -110,6 +126,13 @@ def generate_docx(learning_path):
     doc.save(doc_io)
     doc_io.seek(0)
     return doc_io
+
+# Page config and title
+st.set_page_config(
+    page_title="Learning Path Generator",
+    page_icon="📘",
+    layout="wide"
+)
 
 # Updated Streamlit UI with improved styling
 st.markdown(
@@ -270,6 +293,14 @@ st.markdown(
         
         [data-testid="stSidebar"] li {
             color: #000000 !important;
+        }
+        
+        /* Error message styling */
+        .stException {
+            color: #000000 !important;
+            background-color: #ffe8e8 !important;
+            padding: 1rem !important;
+            border-radius: 8px !important;
         }
     </style>
     """, unsafe_allow_html=True
