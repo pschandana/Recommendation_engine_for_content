@@ -1,14 +1,20 @@
 # LEAP - Learning Enhancement And Progression📚🚀
 
-![Description of Image](Leap_Logo_JPG.jpeg)
 
-LEAP is a web application that generates a personalized learning path based on your educational background, skills, and goals. The app uses an AI model to create a customized plan and allows you to download it as a `.docx` file. It leverages the `python-dotenv` library for managing environment variables and keeps sensitive information (like API keys) safe from being exposed in the code.
+<div align="center">
+    <img src="Leap_Logo_JPG.jpeg" alt="Project Logo" width="450">
+</div>
+
+LEAP is a web application that generates a personalized learning path based on your educational background, skills, and goals. The app uses an AI model to create a customized plan and allows you to download it as a `.docx` file. Built using Python, Streamlit, and the GROQ LLM API, the application generates comprehensive learning paths with key concepts, curated resources, and estimated completion timelines. Features include automated document generation for learning plans, and intelligent resource recommendations from trusted platforms. The tool helps users efficiently plan their learning journey by breaking down complex career transitions into structured, actionable steps with specific time estimates and progress tracking capabilities.
 
 # Features🌟
 - Generates a customized learning path based on user input.
 - Displays a timeline-style learning path.
 - Allows users to download the learning path as a `.docx` file.
 - Securely handles sensitive information like API keys using environment variables.
+
+# Streamlit App🔗
+Link: https://leap-learning-path-generator.streamlit.app/
 
 # Prerequisites⚙️
 
