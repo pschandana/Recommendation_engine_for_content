@@ -24,7 +24,6 @@ def get_api_key():
     
     return api_key
 
-# Chain class implementation with secure API key handling
 class Chain:
     def __init__(self):
         api_key = get_api_key()
@@ -48,25 +47,41 @@ class Chain:
 
             ### INSTRUCTION:
             Based on the user's educational background, skills, and specific goals, generate a personalized learning path. For each learning topic, provide the following:
-            1. The topic name.
-            2. A list of recommended resources categorized as:
-               - **Books**: List a few books for the topic, ordered from beginner to advanced.
-               - **Courses**: List a few online courses or tutorials for the topic, ordered from beginner to advanced.
-               - **Blogs**: List a few blogs or articles for the topic, ordered from beginner to advanced.
-            3. An estimated time for learning the topic.
 
+            1. The topic name
+            2. Key concepts that will be covered in this topic (5-7 main concepts)
+            3. A list of recommended resources categorized as:
+                - Books: List 2-3 highly recommended books for the topic (title and author only)
+                - Courses: List 2-3 recommended courses or tutorials (include official URLs only for well-known platforms like Coursera, edX, Udemy, LinkedIn Learning)
+                - Resources: List 2-3 recommended websites or learning platforms (include official URLs only for well-known platforms)
+            4. An estimated time for learning the topic
+
+            IMPORTANT GUIDELINES:
+            - Only include URLs for official, well-known educational platforms and resources
+            - If you're not completely confident about a URL, provide just the resource name without the link
+            - For books, only provide title and author (no links)
+            - Each topic must include 5-7 key concepts that will be covered
+            
             Structure your response in the following way:
-            - **Topic**: (name of the topic)
-            - **Estimated Time**: (time estimate)
+            - **Topic**: [name of the topic]
+            - **Estimated Time**: [time estimate]
+            - **Key Concepts**:
+              - [Concept 1]
+              - [Concept 2]
+              - [Concept 3]
+              - [Concept 4]
+              - [Concept 5]
             - **Books**:
-              - [Book 1](URL)
-              - [Book 2](URL)
+              - [Book Title] by [Author]
+              - [Book Title] by [Author]
             - **Courses**:
-              - [Course 1](URL)
-              - [Course 2](URL)
-            - **Blogs**:
-              - [Blog 1](URL)
-              - [Blog 2](URL)
+              - [Course Title] - [Platform] ([URL if confident])
+              - [Course Title] - [Platform]
+            - **Resources**:
+              - [Resource Name] ([URL if confident])
+              - [Resource Name]
+
+            Remember to maintain high confidence when including URLs and focus on major educational platforms only.
             """
         )
         chain_path = prompt_path | self.llm
@@ -79,21 +94,12 @@ class Chain:
         
         return response
 
-# Initialize Chain class
-chain = Chain()
-
-# Load Lottie animation
 def load_lottieurl(url):
     r = requests.get(url)
     if r.status_code != 200:
         return None
     return r.json()
 
-# Lottie animation URL with transparent background
-lottie_url = "https://assets2.lottiefiles.com/packages/lf20_DMgKk1.json"
-lottie_animation = load_lottieurl(lottie_url)
-
-# Function to generate a well-formatted .docx
 def generate_docx(learning_path):
     doc = Document()
     doc.add_heading('Personalized Learning Path', 0)
@@ -106,19 +112,25 @@ def generate_docx(learning_path):
         elif line.startswith("- **Estimated Time**"):
             time = line.split(": ")[1]
             doc.add_paragraph(f"Estimated Time: {time}")
+        elif line.startswith("- **Key Concepts**"):
+            doc.add_paragraph("Key Concepts:", style="Heading 3")
         elif line.startswith("- **Books**"):
             doc.add_paragraph("Books:", style="Heading 3")
         elif line.startswith("- **Courses**"):
             doc.add_paragraph("Courses:", style="Heading 3")
-        elif line.startswith("- **Blogs**"):
-            doc.add_paragraph("Blogs:", style="Heading 3")
-        elif line.startswith("  - ["):
-            link_text = line.split("](")[0][4:]
-            url = line.split("](")[1][:-1]
-            p = doc.add_paragraph()
-            r = p.add_run(link_text)
-            r.font.underline = True
-            p.add_run(f" - {url}")
+        elif line.startswith("- **Resources**"):
+            doc.add_paragraph("Resources:", style="Heading 3")
+        elif line.startswith("  - "):
+            text = line[4:]
+            # Create a paragraph with the link if it exists
+            if "(" in text and ")" in text and "http" in text:
+                name = text[:text.find("(")].strip()
+                url = text[text.find("(")+1:text.find(")")].strip()
+                p = doc.add_paragraph()
+                p.add_run(name + " - ")
+                p.add_run(url)
+            else:
+                doc.add_paragraph(text)
         else:
             doc.add_paragraph(line)
             
@@ -127,6 +139,9 @@ def generate_docx(learning_path):
     doc_io.seek(0)
     return doc_io
 
+# Lottie animation URL
+lottie_url = "https://assets2.lottiefiles.com/packages/lf20_DMgKk1.json"
+
 # Page config and title
 st.set_page_config(
     page_title="Learning Path Generator",
@@ -134,7 +149,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Updated Streamlit UI with improved styling
+# [Previous styling code remains the same]
 st.markdown(
     """
     <style>
@@ -350,7 +365,11 @@ with st.sidebar:
 st.title("📘 LEAP - Learning Enhancement And Progression: Personalized Learning Path Generator")
 st.write("Enter your educational background, skills, and goals to generate a customized learning path.")
 
+# Initialize Chain
+chain = Chain()
+
 # Lottie animation display
+lottie_animation = load_lottieurl(lottie_url)
 if lottie_animation:
     st.markdown('<div class="lottie-container">', unsafe_allow_html=True)
     st_lottie(
