@@ -1,5 +1,7 @@
 # LEAP - Learning Enhancement And Progression📚🚀
 
+![Description of Image](Leap_Logo_JPG.jpeg)
+
 LEAP is a web application that generates a personalized learning path based on your educational background, skills, and goals. The app uses an AI model to create a customized plan and allows you to download it as a `.docx` file. It leverages the `python-dotenv` library for managing environment variables and keeps sensitive information (like API keys) safe from being exposed in the code.
 
 # Features🌟
