@@ -3,3 +3,6 @@ streamlit-lottie
 python-docx
 requests
 langchain-groq
+pymongo
+python-dotenv
+
