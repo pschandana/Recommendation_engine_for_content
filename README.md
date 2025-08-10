@@ -18,34 +18,34 @@ Recommendation Engine is a web application that generates a personalized learnin
   From career growth to leisure reading, we make your next step easy and exciting.
 
 
-# CLone this repository
+ Clone this repository
 
-#  Create and Activate Virtual Environment
+Create and Activate Virtual Environment
 Create virtual environment:
 python3 -m venv venv
 
- # Activate virtual environment (Linux/Mac):
+ Activate virtual environment (Linux/Mac):
 source venv/bin/activate
 
- # Activate virtual environment (Windows):
+  Activate virtual environment (Windows):
 .\venv\Scripts\activate
 
-#  Install Required Dependencies
+ Install Required Dependencies
 pip install -r requirements.txt
 
-# Step 4: Set up your environment variables
+ Set up your environment variables
 Create a .env file in the root of your project directory.
 Add the necessary API keys or environment variables in the .env file. For example:
 
 API_KEY=your-api-key-here
 
 
-# Step 5: Make sure your .gitignore file is properly set up to ignore the .env file
+ Make sure your .gitignore file is properly set up to ignore the .env file
 Add .env to the .gitignore to prevent accidentally committing your API key to GitHub:
 
 .env
 
-# Step 6: Run the Application
+ Run the Application
 streamlit run app.py
 
 ## How It Works 🤖
