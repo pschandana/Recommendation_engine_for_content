@@ -17,8 +17,9 @@ Recommendation Engine is a web application that generates a personalized learnin
   Perfect for exploring new authors, genres, or topics while staying close to your taste.
   From career growth to leisure reading, we make your next step easy and exciting.
 
+# Project Setup
 
- Clone this repository
+Clone this repository
 
 Create and Activate Virtual Environment
 Create virtual environment:
